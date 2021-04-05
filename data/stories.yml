@@ -9,6 +9,18 @@ stories:
   - intent: aggregate
   - action: action_Aggregate
 
+- story: facility path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: facility_info
+  - action: action_Pop
+
+- story: inquire path
+  steps:
+  - intent: inquire
+  - action: utter_services
+
 - story: sad path 1
   steps:
   - intent: greet
@@ -19,12 +31,4 @@ stories:
   - intent: affirm
   - action: utter_happy
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+

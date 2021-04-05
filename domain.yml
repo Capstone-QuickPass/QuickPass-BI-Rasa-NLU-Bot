@@ -1,53 +1,83 @@
-version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - aggregate
-
-responses:
-  utter_greet:
-  - text: "Welcome to the QuickPass BI Bot, what can I do for you?"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-  
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-
+version: '2.0'
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- aggregate:
+    use_entities: true
+- facility_info:
+    use_entities: true
+- inquire:
+    use_entities: true
+- nlu_fallback:
+    use_entities: true
+entities:
+- mongo_type
+- mongo_time
+- pop_type
 slots:
   mongo_type:
-    type: any
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
   mongo_time:
-    type: any
-
-entities:
-  - mongo_type
-  - mongo_time
-
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  pop_type:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_greet:
+  - text: |
+      Welcome to the QuickPass BI Bot, what can I do for you? This Bot currently supports:
+      - Capacity Information ( ex. what is the current load of the facility?)
+      - Alerting list (ex. show me the alerts from the past 3 hours)
+      - Info on Individuals entering (ex. how many people have entered the facility in the last 7 hours?)
+  - text: Hi! what can I do for you?
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+  utter_services:
+  - text: |
+      This Bot currently supports:
+      - Capacity Information ( ex. what is the current load of the facility?)
+      - Alerting list (ex. show me the alerts from the past 3 hours)
+      - Info on Individuals entering (ex. how many people have entered the facility in the last 7 hours?)
+  utter_default:
+  - text: Sorry I didn't get that. Can you rephrase?
 actions:
-  - action_Aggregate
+- action_Aggregate
+- action_Pop
+forms: {}
+e2e_actions: []

@@ -21,6 +21,22 @@ nlu:
   examples: |
     - how many [alerts](mongo_type) came in the last [3](mongo_time) hours
     - how many [people](mongo_type) came in the last [6](mongo_time) hours
+    - what are the [alerts](mongo_type) that came in the last [2](mongo_time) hours
+    - what time did [people](mongo_type) enter in the last [10](mongo_time) hours
+
+- intent: facility_info
+  examples: |
+    - what is the [max](pop_type) capacity
+    - what is the [current](pop_type) capacity
+    - what is the [current](pop_type) population of the facility
+    - what is the [maximum](pop_type) number of people this facility supports
+    - how many people are [currently](pop_type) in the facility
+
+- intent: inquire
+  examples: |
+    - what services does this bot offer
+    - what can I learn from this bot
+    - what can you tell me
 
 
 - intent: affirm
